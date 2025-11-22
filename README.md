@@ -1,59 +1,193 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<div align="center">
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# 🛍️ Modern E-Commerce
 
-## About Laravel
+[![Laravel](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.x-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**A complete, modern shopping experience built with performance and aesthetics in mind.**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+[View Demo](#) · [Report Bug](#) · [Request Feature](#)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+</div>
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 📋 About The Project
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+This application is a robust E-Commerce platform designed to provide a seamless shopping experience. Built on the powerful **Laravel 12** framework and styled with **TailwindCSS**, it offers a responsive, fast, and user-friendly interface for both customers and administrators.
 
-## Laravel Sponsors
+### ✨ Key Features
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+-   🛍️ **Product Browsing**: Intuitive product grid with detailed views.
+-   🛒 **Shopping Cart**: Real-time cart management.
+-   📦 **Order Processing**: Complete order lifecycle from placement to completion.
+-   👥 **Role-Based Access**: Distinct panels for **Admin** (management) and **User** (shopping).
+-   💳 **Payment Integration**: Support for various payment statuses and methods.
+-   📱 **Responsive Design**: Optimized for mobile, tablet, and desktop.
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 📸 Screenshots
 
-## Contributing
+<div align="center">
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| **Home Page** | **Product Detail** |
+|:---:|:---:|
+| <img src="public/screenshots/home.png" alt="Home Page" width="400"/> | <img src="public/screenshots/product-detail.png" alt="Product Detail" width="400"/> |
+| **Login Page** | **Register Page** |
+| <img src="public/screenshots/login.png" alt="Login Page" width="400"/> | <img src="public/screenshots/register.png" alt="Register Page" width="400"/> |
 
-## Code of Conduct
+</div>
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 🚀 Getting Started
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Follow these simple steps to get a local copy up and running.
 
-## License
+### Prerequisites
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Ensure you have the following installed:
+*   **PHP** >= 8.2
+*   **Composer**
+*   **Node.js** & **NPM**
+*   **MySQL**
+
+### 💿 Installation
+
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/SanDiv-eL/SanDiv-eL.git
+    cd SanDiv-eL
+    ```
+
+2.  **Install Dependencies**
+    ```bash
+    composer install
+    npm install
+    ```
+
+3.  **Configure Environment**
+    ```bash
+    cp .env.example .env
+    ```
+    Update `.env` with your database credentials:
+    ```env
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=ecommerce
+    DB_USERNAME=root
+    DB_PASSWORD=
+    ```
+
+4.  **Generate Key & Setup Database**
+    ```bash
+    php artisan key:generate
+    php artisan migrate --seed
+    ```
+    > **Note**: The `--seed` command populates the database with demo data and default accounts.
+
+5.  **Run the Application**
+    Start the development servers in two separate terminals:
+    ```bash
+    # Terminal 1
+    npm run dev
+
+    # Terminal 2
+    php artisan serve
+    ```
+    Access the app at `http://localhost:8000`.
+
+---
+
+## 🔐 Login Credentials
+
+Use these pre-configured accounts to explore the application.
+
+| Role | Email | Password | Permissions |
+| :--- | :--- | :--- | :--- |
+| **👑 Admin** | `admin@ex.com` | `12345678` | Dashboard access, Product management, Order oversight. |
+| **👤 User** | `user@ex.com` | `12345678` | Browse products, Add to cart, Place orders. |
+
+---
+
+## 🗄️ Database Structure
+
+The application data is organized into the following core tables:
+
+### 👤 `users`
+| Column | Type | Description |
+| :--- | :--- | :--- |
+| `id` | PK | Unique identifier |
+| `name` | String | User's full name |
+| `email` | String | Unique email address |
+| `email_verified_at` | Timestamp | Email verification timestamp (Nullable) |
+| `password` | String | Hashed password |
+| `role` | String | `admin` or `user` (Default: `user`) |
+| `remember_token` | String | "Remember me" token |
+| `created_at` | Timestamp | Creation timestamp |
+| `updated_at` | Timestamp | Last update timestamp |
+
+### 🏷️ `categories`
+| Column | Type | Description |
+| :--- | :--- | :--- |
+| `id` | PK | Unique identifier |
+| `name` | String | Category name |
+| `slug` | String | URL-friendly name (Unique) |
+| `description` | Text | Category description (Nullable) |
+| `created_at` | Timestamp | Creation timestamp |
+| `updated_at` | Timestamp | Last update timestamp |
+
+### 📦 `products`
+| Column | Type | Description |
+| :--- | :--- | :--- |
+| `id` | PK | Unique identifier |
+| `category_id` | FK | Linked Category |
+| `name` | String | Product name |
+| `slug` | String | URL-friendly name (Unique) |
+| `description` | Text | Product description |
+| `price` | BigInt | Price in Rupiah (Unsigned) |
+| `stock` | Integer | Available quantity (Default: 0) |
+| `rating` | Decimal | Product rating (3,2) (Default: 0.00) |
+| `sold_count` | Integer | Number of units sold (Default: 0) |
+| `image` | String | Path to product image (Nullable) |
+| `specifications` | JSON | Technical specs (CPU, RAM, etc.) |
+| `created_at` | Timestamp | Creation timestamp |
+| `updated_at` | Timestamp | Last update timestamp |
+
+### 🧾 `orders`
+| Column | Type | Description |
+| :--- | :--- | :--- |
+| `id` | PK | Unique identifier |
+| `user_id` | FK | Customer |
+| `total_price` | BigInt | Grand total (Unsigned) |
+| `status` | String | `pending`, `processing`, `completed`, `cancelled` |
+| `payment_status`| String | `unpaid`, `paid` |
+| `payment_method`| String | Payment method used (Nullable) |
+| `shipping_address`| Text | Full shipping address |
+| `created_at` | Timestamp | Creation timestamp |
+| `updated_at` | Timestamp | Last update timestamp |
+
+### 🛒 `order_items`
+| Column | Type | Description |
+| :--- | :--- | :--- |
+| `id` | PK | Unique identifier |
+| `order_id` | FK | Linked Order |
+| `product_id` | FK | Linked Product |
+| `quantity` | Integer | Quantity purchased |
+| `price` | BigInt | Price at time of purchase (Unsigned) |
+| `created_at` | Timestamp | Creation timestamp |
+| `updated_at` | Timestamp | Last update timestamp |
+
+---
+
+## 🛠️ Tech Stack
+
+*   **Framework:** [Laravel 12](https://laravel.com)
+*   **Styling:** [TailwindCSS](https://tailwindcss.com)
+*   **Templating:** Blade
+*   **Database:** MySQL
