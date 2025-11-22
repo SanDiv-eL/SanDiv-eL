@@ -1,10 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-lg sm:text-xl text-gray-800 leading-tight">
-            {{ $product->name }}
-        </h2>
-    </x-slot>
-
     <div class="py-6 sm:py-12 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
@@ -23,7 +17,14 @@
                             <p class="text-xs sm:text-sm font-medium text-indigo-600 mb-2">
                                 {{ $product->category->name ?? 'Computer' }}
                             </p>
-                            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">{{ $product->name }}</h1>
+                            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">{{ $product->name }}</h1>
+                            
+                            <div class="flex items-center mb-4">
+                                <x-star-rating :rating="$product->rating" size="w-5 h-5" />
+                                <span class="mx-3 text-gray-300">|</span>
+                                <span class="text-sm text-gray-500">{{ $product->sold_count }} sold</span>
+                            </div>
+
                             <p class="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed">{{ $product->description }}</p>
 
                             <!-- Price -->

@@ -8,7 +8,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $featuredProducts = \App\Models\Product::latest()->take(4)->get();
+        $featuredProducts = \App\Models\Product::orderBy('sold_count', 'desc')->take(4)->get();
         return view('welcome', compact('featuredProducts'));
     }
 }

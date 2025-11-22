@@ -1,75 +1,56 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('All Products') }}
-            </h2>
-            <p class="text-sm text-gray-600">{{ $products->total() }} products found</p>
-        </div>
-    </x-slot>
-
-    <div class="py-8 sm:py-12 bg-gray-50">
+    <div class="py-6 sm:py-8 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Page Title -->
-            <div class="mb-6 sm:mb-8">
-                <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Browse Our Collection</h1>
-                <p class="text-sm sm:text-base text-gray-600">Discover the latest high-performance computers and accessories</p>
+            <div class="mb-6">
+                <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">All Products</h1>
+                <p class="text-sm sm:text-base text-gray-600 mt-1">Discover the latest high-performance computers and accessories</p>
             </div>
-
-            <!-- Search and Filter Section -->
             <div class="mb-6 bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-6">
-                <form method="GET" action="{{ route('products.index') }}" class="space-y-4">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <!-- Search Bar -->
-                        <div class="md:col-span-2">
-                            <label for="search" class="block text-sm font-medium text-gray-700 mb-2">Search Products</label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                    </svg>
-                                </div>
-                                <input type="text" 
-                                       name="search" 
-                                       id="search" 
-                                       value="{{ request('search') }}"
-                                       class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition"
-                                       placeholder="Search by product name or description...">
-                            </div>
+                <form method="GET" action="{{ route('products.index') }}" class="flex flex-col md:flex-row gap-4">
+                    <!-- Search Bar -->
+                    <div class="flex-1 relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
                         </div>
+                        <input type="text" 
+                               name="search" 
+                               value="{{ request('search') }}"
+                               class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition"
+                               placeholder="Search products...">
+                    </div>
 
-                        <!-- Category Filter -->
-                        <div>
-                            <label for="category" class="block text-sm font-medium text-gray-700 mb-2">Category</label>
-                            <select name="category" 
-                                    id="category" 
-                                    class="block w-full py-2.5 px-3 border border-gray-300 bg-white rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition">
-                                <option value="">All Categories</option>
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
-                                        {{ $category->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+                    <!-- Category Filter -->
+                    <div class="w-full md:w-48">
+                        <select name="category" 
+                                class="block w-full py-2.5 px-3 border border-gray-300 bg-white rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition">
+                            <option value="">All Categories</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <!-- Action Buttons -->
-                    <div class="flex flex-col sm:flex-row gap-3 sm:justify-end">
-                        <a href="{{ route('products.index') }}" 
-                           class="inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                            </svg>
-                            Reset
-                        </a>
+                    <div class="flex items-center gap-2">
                         <button type="submit" 
-                                class="inline-flex items-center justify-center px-6 py-2 border border-transparent rounded-lg text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition shadow-sm">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
-                            </svg>
-                            Apply Filters
+                                class="flex-1 md:flex-none inline-flex items-center justify-center px-6 py-2.5 border border-transparent rounded-lg text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition shadow-sm">
+                            Filter
                         </button>
+                        
+                        @if(request('search') || request('category'))
+                            <a href="{{ route('products.index') }}" 
+                               class="flex-1 md:flex-none inline-flex items-center justify-center px-4 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition"
+                               title="Reset Filters">
+                                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </a>
+                        @endif
                     </div>
                 </form>
 
@@ -110,17 +91,17 @@
 
             <!-- Products Grid -->
             @if($products->count() > 0)
-                <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <div class="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     @foreach($products as $product)
-                        <div class="group bg-white rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col transform hover:-translate-y-2">
+                        <div class="group bg-white rounded-xl sm:rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col transform hover:-translate-y-2">
                             <div class="relative pb-48 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
                                 <!-- Stock Badge -->
                                 @if($product->stock > 0)
-                                    <span class="absolute top-3 left-3 z-10 inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-500 text-white shadow-lg">
+                                    <span class="absolute top-2 left-2 sm:top-3 sm:left-3 z-10 inline-flex items-center px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs font-semibold bg-green-500 text-white shadow-lg">
                                         In Stock
                                     </span>
                                 @else
-                                    <span class="absolute top-3 left-3 z-10 inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-red-500 text-white shadow-lg">
+                                    <span class="absolute top-2 left-2 sm:top-3 sm:left-3 z-10 inline-flex items-center px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs font-semibold bg-red-500 text-white shadow-lg">
                                         Out of Stock
                                     </span>
                                 @endif
@@ -134,34 +115,43 @@
                                 <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
                             </div>
                             
-                            <div class="p-5 flex-1 flex flex-col">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
+                            <div class="p-3 sm:p-5 flex-1 flex flex-col">
+                                <div class="flex items-center justify-between mb-1 sm:mb-2">
+                                    <span class="inline-flex items-center px-2 py-0.5 sm:px-2.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
                                         {{ $product->category->name }}
                                     </span>
                                 </div>
                                 
-                                <h3 class="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-indigo-600 transition-colors">
+                                <h3 class="text-sm sm:text-lg font-semibold text-gray-900 mb-1 sm:mb-2 line-clamp-2 group-hover:text-indigo-600 transition-colors">
                                     {{ $product->name }}
                                 </h3>
                                 
-                                <p class="text-sm text-gray-600 mb-4 line-clamp-2 flex-1">
+                                <div class="flex items-center mb-2">
+                                    <x-star-rating :rating="$product->rating" />
+                                    <span class="mx-1.5 text-gray-300">|</span>
+                                    <span class="text-xs text-gray-500">{{ $product->sold_count }} sold</span>
+                                </div>
+                                
+                                <p class="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-4 line-clamp-2 flex-1 hidden sm:block">
                                     {{ $product->description }}
                                 </p>
                             
-                            <div class="mt-4 flex items-center justify-between">
-                                <div class="flex-1 min-w-0 mr-3">
-                                    <p class="text-lg font-bold text-gray-900 truncate">{{ formatRupiah($product->price) }}</p>
-                                    <p class="text-xs text-gray-500 mt-0.5">Free shipping</p>
+                                <div class="mt-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm sm:text-lg font-bold text-gray-900 truncate">{{ formatRupiah($product->price) }}</p>
+                                        <p class="text-xs text-gray-500 hidden sm:block">Free shipping</p>
+                                    </div>
+                                    <a href="{{ route('products.show', $product->slug) }}" class="inline-flex items-center justify-center px-4 py-2.5 border border-transparent text-sm font-medium rounded-lg text-indigo-700 bg-indigo-50 hover:bg-indigo-100 transition-colors duration-150 w-full sm:w-auto flex-shrink-0 group-hover:bg-indigo-600 group-hover:text-white">
+                                    View Details
+                                    <svg class="w-4 h-4 ml-2 -mr-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                    </svg>
+                                </a>    </a>
                                 </div>
-                                <a href="{{ route('products.show', $product->slug) }}" class="inline-flex items-center justify-center px-4 py-2.5 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-150 shadow-sm hover:shadow-md flex-shrink-0">
-                                    View
-                                </a>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-            </div>
+                    @endforeach
+                </div>
 
                 <!-- Pagination -->
                 <div class="mt-8">

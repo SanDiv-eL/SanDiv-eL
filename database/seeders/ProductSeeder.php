@@ -39,6 +39,8 @@ class ProductSeeder extends Seeder
             'description' => 'Premium ultrabook with stunning OLED display and all-day battery life. Perfect for professionals who demand excellence.',
             'price' => 18500000,
             'stock' => 45,
+            'rating' => 4.7,
+            'sold_count' => 342,
             'image' => 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=300&fit=crop',
             'specifications' => [
                 'CPU' => 'Intel Core i7-13700H',
@@ -56,6 +58,8 @@ class ProductSeeder extends Seeder
             'description' => 'Ultimate gaming powerhouse with RGB keyboard and advanced cooling system. Dominate every game.',
             'price' => 35000000,
             'stock' => 20,
+            'rating' => 4.9,
+            'sold_count' => 187,
             'image' => 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=400&h=300&fit=crop',
             'specifications' => [
                 'CPU' => 'AMD Ryzen 9 7945HX',
@@ -73,6 +77,8 @@ class ProductSeeder extends Seeder
             'description' => 'Business-class laptop with military-grade durability and legendary keyboard. Built for productivity.',
             'price' => 22000000,
             'stock' => 30,
+            'rating' => 4.8,
+            'sold_count' => 256,
             'image' => 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400&h=300&fit=crop',
             'specifications' => [
                 'CPU' => 'Intel Core i7-1365U',
@@ -90,6 +96,8 @@ class ProductSeeder extends Seeder
             'description' => 'Incredibly thin and light with the powerful M2 chip. Perfect blend of performance and portability.',
             'price' => 19500000,
             'stock' => 50,
+            'rating' => 4.9,
+            'sold_count' => 428,
             'image' => 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=300&fit=crop',
             'specifications' => [
                 'CPU' => 'Apple M2 8-Core',
@@ -107,6 +115,8 @@ class ProductSeeder extends Seeder
             'description' => 'Creator-focused laptop with stunning 4K OLED display and powerful performance for content creation.',
             'price' => 28000000,
             'stock' => 25,
+            'rating' => 4.6,
+            'sold_count' => 145,
             'image' => 'https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=400&h=300&fit=crop',
             'specifications' => [
                 'CPU' => 'Intel Core i9-13900H',
@@ -124,6 +134,8 @@ class ProductSeeder extends Seeder
             'description' => 'Affordable gaming laptop with solid performance. Great entry point for casual gamers.',
             'price' => 12500000,
             'stock' => 60,
+            'rating' => 4.5,
+            'sold_count' => 523,
             'image' => 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=400&h=300&fit=crop',
             'specifications' => [
                 'CPU' => 'Intel Core i5-12500H',
@@ -141,6 +153,8 @@ class ProductSeeder extends Seeder
             'description' => 'Lightweight and portable ultrabook perfect for students and mobile professionals.',
             'price' => 9500000,
             'stock' => 70,
+            'rating' => 4.4,
+            'sold_count' => 612,
             'image' => 'https://images.unsplash.com/photo-1484788984921-03950022c9ef?w=400&h=300&fit=crop',
             'specifications' => [
                 'CPU' => 'AMD Ryzen 5 7530U',
@@ -158,6 +172,8 @@ class ProductSeeder extends Seeder
             'description' => 'Mid-range gaming laptop with excellent price-to-performance ratio and premium build quality.',
             'price' => 24000000,
             'stock' => 35,
+            'rating' => 4.8,
+            'sold_count' => 289,
             'image' => 'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=400&h=300&fit=crop',
             'specifications' => [
                 'CPU' => 'AMD Ryzen 7 7745HX',
@@ -175,6 +191,8 @@ class ProductSeeder extends Seeder
             'description' => 'Fast and secure Chromebook for everyday computing and cloud-based work.',
             'price' => 6500000,
             'stock' => 80,
+            'rating' => 4.3,
+            'sold_count' => 156,
             'image' => 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop',
             'specifications' => [
                 'CPU' => 'Intel Core i3-1215U',
@@ -192,6 +210,8 @@ class ProductSeeder extends Seeder
             'description' => 'High-performance gaming laptop with advanced thermal management and customizable RGB.',
             'price' => 29500000,
             'stock' => 18,
+            'rating' => 4.7,
+            'sold_count' => 134,
             'image' => 'https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?w=400&h=300&fit=crop',
             'specifications' => [
                 'CPU' => 'Intel Core i7-13700HX',
@@ -210,6 +230,8 @@ class ProductSeeder extends Seeder
             'description' => 'Professional workstation for 3D rendering, video editing, and heavy computational tasks.',
             'price' => 48000000,
             'stock' => 10,
+            'rating' => 5.0,
+            'sold_count' => 42,
             'image' => 'https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=400&h=300&fit=crop',
             'specifications' => [
                 'CPU' => 'Intel Core i9-13900K',
@@ -227,6 +249,8 @@ class ProductSeeder extends Seeder
             'description' => 'Top-tier gaming desktop with liquid cooling and RGB everything. Maximum FPS guaranteed.',
             'price' => 42000000,
             'stock' => 12,
+            'rating' => 4.9,
+            'sold_count' => 89,
             'image' => 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=400&h=300&fit=crop',
             'specifications' => [
                 'CPU' => 'AMD Ryzen 9 7950X3D',
@@ -244,6 +268,8 @@ class ProductSeeder extends Seeder
             'description' => 'Reliable desktop for office work with excellent multitasking capabilities.',
             'price' => 15000000,
             'stock' => 40,
+            'rating' => 4.6,
+            'sold_count' => 312,
             'image' => 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=400&h=300&fit=crop',
             'specifications' => [
                 'CPU' => 'Intel Core i5-13400',
@@ -261,6 +287,8 @@ class ProductSeeder extends Seeder
             'description' => 'Optimized for content creators with powerful GPU and ample storage.',
             'price' => 38000000,
             'stock' => 15,
+            'rating' => 4.8,
+            'sold_count' => 67,
             'image' => 'https://images.unsplash.com/photo-1547082299-de196ea013d6?w=400&h=300&fit=crop',
             'specifications' => [
                 'CPU' => 'AMD Ryzen 9 7900X',
@@ -278,6 +306,8 @@ class ProductSeeder extends Seeder
             'description' => 'Entry-level gaming PC that delivers solid 1080p gaming performance.',
             'price' => 11000000,
             'stock' => 50,
+            'rating' => 4.5,
+            'sold_count' => 456,
             'image' => 'https://images.unsplash.com/photo-1587202372583-49330a15584d?w=400&h=300&fit=crop',
             'specifications' => [
                 'CPU' => 'AMD Ryzen 5 5600',
@@ -296,6 +326,8 @@ class ProductSeeder extends Seeder
             'description' => 'Premium mechanical keyboard with Cherry MX switches and per-key RGB lighting.',
             'price' => 1850000,
             'stock' => 100,
+            'rating' => 4.8,
+            'sold_count' => 892,
             'image' => 'https://images.unsplash.com/photo-1595225476474-87563907a212?w=400&h=300&fit=crop',
             'specifications' => [
                 'Switch Type' => 'Cherry MX Red',
@@ -313,6 +345,8 @@ class ProductSeeder extends Seeder
             'description' => 'Ultra-lightweight wireless gaming mouse with 20,000 DPI sensor.',
             'price' => 1250000,
             'stock' => 120,
+            'rating' => 4.7,
+            'sold_count' => 1205,
             'image' => 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&h=300&fit=crop',
             'specifications' => [
                 'Sensor' => 'Optical 20,000 DPI',
@@ -330,6 +364,8 @@ class ProductSeeder extends Seeder
             'description' => 'Stunning 4K IPS monitor with HDR support and 144Hz refresh rate.',
             'price' => 6500000,
             'stock' => 35,
+            'rating' => 4.9,
+            'sold_count' => 156,
             'image' => 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&h=300&fit=crop',
             'specifications' => [
                 'Size' => '27 inches',
@@ -348,6 +384,8 @@ class ProductSeeder extends Seeder
             'description' => 'All-in-one docking station with dual 4K display support and 100W power delivery.',
             'price' => 3200000,
             'stock' => 45,
+            'rating' => 4.6,
+            'sold_count' => 234,
             'image' => 'https://images.unsplash.com/photo-1625948515291-69613efd103f?w=400&h=300&fit=crop',
             'specifications' => [
                 'Ports' => '2x HDMI, 4x USB 3.0, 2x USB-C',
@@ -365,6 +403,8 @@ class ProductSeeder extends Seeder
             'description' => 'Premium wireless headset with active noise cancellation and studio-quality sound.',
             'price' => 2800000,
             'stock' => 60,
+            'rating' => 4.8,
+            'sold_count' => 345,
             'image' => 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop',
             'specifications' => [
                 'Driver' => '50mm Neodymium',
