@@ -3,8 +3,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Page Title -->
             <div class="mb-6">
-                <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">All Products</h1>
-                <p class="text-sm sm:text-base text-gray-600 mt-1">Discover the latest high-performance computers and accessories</p>
+                <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Semua Produk</h1>
+                <p class="text-sm sm:text-base text-gray-600 mt-1">Temukan komputer dan aksesori performa tinggi terkini</p>
             </div>
             <div class="mb-6 bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-6">
                 <form method="GET" action="{{ route('products.index') }}" class="flex flex-col md:flex-row gap-4">
@@ -19,14 +19,14 @@
                                name="search" 
                                value="{{ request('search') }}"
                                class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition"
-                               placeholder="Search products...">
+                               placeholder="Cari produk...">
                     </div>
 
                     <!-- Category Filter -->
                     <div class="w-full md:w-48">
                         <select name="category" 
                                 class="block w-full py-2.5 px-3 border border-gray-300 bg-white rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition">
-                            <option value="">All Categories</option>
+                            <option value="">Semua Kategori</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
                                     {{ $category->name }}
@@ -45,7 +45,7 @@
                         @if(request('search') || request('category'))
                             <a href="{{ route('products.index') }}" 
                                class="flex-1 md:flex-none inline-flex items-center justify-center px-4 py-2.5 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition"
-                               title="Reset Filters">
+                               title="Reset Filter">
                                 <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                 </svg>
@@ -58,10 +58,10 @@
                 @if(request('search') || request('category'))
                     <div class="mt-4 pt-4 border-t border-gray-200">
                         <div class="flex flex-wrap items-center gap-2">
-                            <span class="text-sm font-medium text-gray-700">Active filters:</span>
+                            <span class="text-sm font-medium text-gray-700">Filter aktif:</span>
                             @if(request('search'))
                                 <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-                                    Search: "{{ request('search') }}"
+                                    Cari: "{{ request('search') }}"
                                     <a href="{{ route('products.index', array_filter(['category' => request('category')])) }}" class="ml-2 text-indigo-600 hover:text-indigo-800">
                                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
@@ -75,7 +75,7 @@
                                 @endphp
                                 @if($selectedCategory)
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-                                        Category: {{ $selectedCategory->name }}
+                                        Kategori: {{ $selectedCategory->name }}
                                         <a href="{{ route('products.index', array_filter(['search' => request('search')])) }}" class="ml-2 text-indigo-600 hover:text-indigo-800">
                                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
@@ -98,11 +98,11 @@
                                 <!-- Stock Badge -->
                                 @if($product->stock > 0)
                                     <span class="absolute top-2 left-2 sm:top-3 sm:left-3 z-10 inline-flex items-center px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs font-semibold bg-green-500 text-white shadow-lg">
-                                        In Stock
+                                        Tersedia
                                     </span>
                                 @else
                                     <span class="absolute top-2 left-2 sm:top-3 sm:left-3 z-10 inline-flex items-center px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs font-semibold bg-red-500 text-white shadow-lg">
-                                        Out of Stock
+                                        Stok Habis
                                     </span>
                                 @endif
                                 
@@ -129,7 +129,7 @@
                                 <div class="flex items-center mb-2">
                                     <x-star-rating :rating="$product->rating" />
                                     <span class="mx-1.5 text-gray-300">|</span>
-                                    <span class="text-xs text-gray-500">{{ $product->sold_count }} sold</span>
+                                    <span class="text-xs text-gray-500">{{ $product->sold_count }} terjual</span>
                                 </div>
                                 
                                 <p class="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-4 line-clamp-2 flex-1 hidden sm:block">
@@ -139,10 +139,10 @@
                                 <div class="mt-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                                     <div class="flex-1 min-w-0">
                                         <p class="text-sm sm:text-lg font-bold text-gray-900 truncate">{{ formatRupiah($product->price) }}</p>
-                                        <p class="text-xs text-gray-500 hidden sm:block">Free shipping</p>
+                                        <p class="text-xs text-gray-500 hidden sm:block">Gratis ongkir</p>
                                     </div>
                                     <a href="{{ route('products.show', $product->slug) }}" class="inline-flex items-center justify-center px-4 py-2.5 border border-transparent text-sm font-medium rounded-lg text-indigo-700 bg-indigo-50 hover:bg-indigo-100 transition-colors duration-150 w-full sm:w-auto flex-shrink-0 group-hover:bg-indigo-600 group-hover:text-white">
-                                    View Details
+                                    Lihat Detail
                                     <svg class="w-4 h-4 ml-2 -mr-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                     </svg>
@@ -163,11 +163,11 @@
                     <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
-                    <h3 class="mt-2 text-sm font-medium text-gray-900">No products found</h3>
-                    <p class="mt-1 text-sm text-gray-500">Try adjusting your search or filter to find what you're looking for.</p>
+                    <h3 class="mt-2 text-sm font-medium text-gray-900">Produk tidak ditemukan</h3>
+                    <p class="mt-1 text-sm text-gray-500">Coba sesuaikan pencarian atau filter Anda untuk menemukan yang Anda cari.</p>
                     <div class="mt-6">
                         <a href="{{ route('products.index') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            Clear all filters
+                            Hapus semua filter
                         </a>
                     </div>
                 </div>

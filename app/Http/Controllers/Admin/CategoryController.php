@@ -41,7 +41,7 @@ class CategoryController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('admin.categories.index')->with('success', 'Category created successfully.');
+        return redirect()->route('admin.categories.index')->with('success', 'Kategori berhasil dibuat.');
     }
 
     /**
@@ -79,7 +79,7 @@ class CategoryController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully.');
+        return redirect()->route('admin.categories.index')->with('success', 'Kategori berhasil diperbarui.');
     }
 
     /**
@@ -95,6 +95,6 @@ class CategoryController extends Controller
         }
         
         $category->delete();
-        return redirect()->route('admin.categories.index')->with('success', 'Category deleted successfully.');
+        return redirect()->route('admin.categories.index')->with('success', 'Kategori berhasil dihapus.');
     }
 }

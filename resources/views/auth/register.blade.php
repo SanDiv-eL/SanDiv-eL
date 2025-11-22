@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="mb-6 text-center">
-        <h2 class="text-2xl font-bold text-gray-900">Create Account</h2>
-        <p class="text-sm text-gray-600 mt-2">Join us today</p>
+        <h2 class="text-2xl font-bold text-gray-900">Buat Akun</h2>
+        <p class="text-sm text-gray-600 mt-2">Bergabunglah dengan kami</p>
     </div>
 
     <form method="POST" action="{{ route('register') }}">
@@ -49,15 +49,15 @@
 
         <div class="flex items-center justify-end mt-6">
             <x-primary-button class="w-full justify-center">
-                {{ __('Register') }}
+                Daftar
             </x-primary-button>
         </div>
 
         <div class="mt-6 text-center">
             <p class="text-sm text-gray-600">
-                Already have an account?
+                Sudah punya akun?
                 <a href="{{ route('login') }}" class="font-medium text-indigo-600 hover:text-indigo-500">
-                    Log in
+                    Masuk
                 </a>
             </p>
         </div>

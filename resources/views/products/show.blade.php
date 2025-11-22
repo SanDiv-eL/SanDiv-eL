@@ -4,10 +4,10 @@
             <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 p-4 sm:p-8">
                     <!-- Product Image -->
-                    <div class="bg-gray-200 rounded-xl overflow-hidden">
+                    <div class="bg-gray-200 rounded-xl overflow-hidden self-start">
                         <img src="{{ $product->image && Str::startsWith($product->image, 'http') ? $product->image : 'https://placehold.co/600x400?text=' . urlencode($product->name) }}" 
                              alt="{{ $product->name }}" 
-                             class="w-full h-auto object-cover"
+                             class="w-full h-auto object-cover block"
                              onerror="this.onerror=null; this.src='https://placehold.co/600x400?text=No+Image';">
                     </div>
 
@@ -22,7 +22,7 @@
                             <div class="flex items-center mb-4">
                                 <x-star-rating :rating="$product->rating" size="w-5 h-5" />
                                 <span class="mx-3 text-gray-300">|</span>
-                                <span class="text-sm text-gray-500">{{ $product->sold_count }} sold</span>
+                                <span class="text-sm text-gray-500">{{ $product->sold_count }} terjual</span>
                             </div>
 
                             <p class="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 leading-relaxed">{{ $product->description }}</p>
@@ -32,9 +32,9 @@
                                 <p class="text-3xl sm:text-4xl font-bold text-gray-900">{{ formatRupiah($product->price) }}</p>
                                 <p class="text-xs sm:text-sm text-gray-500 mt-1">
                                     @if($product->stock > 0)
-                                        <span class="text-green-600 font-medium">In Stock ({{ $product->stock }} available)</span>
+                                        <span class="text-green-600 font-medium">Tersedia ({{ $product->stock }} tersisa)</span>
                                     @else
-                                        <span class="text-red-600 font-medium">Out of Stock</span>
+                                        <span class="text-red-600 font-medium">Stok Habis</span>
                                     @endif
                                 </p>
                             </div>
@@ -42,7 +42,7 @@
                             <!-- Specifications -->
                             @if($product->specifications)
                                 <div class="mb-6">
-                                    <h3 class="text-lg font-semibold text-gray-900 mb-3">Specifications</h3>
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-3">Spesifikasi</h3>
                                     <div class="bg-gray-50 rounded-lg p-4 space-y-2">
                                         @foreach($product->specifications as $key => $value)
                                             <div class="flex justify-between py-2 border-b border-gray-200 last:border-0">
@@ -63,7 +63,7 @@
                                     
                                     <!-- Quantity Selector -->
                                     <div class="mb-4">
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Quantity</label>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Jumlah</label>
                                         <div class="flex items-center space-x-2 sm:space-x-3">
                                             <button type="button" onclick="decrementQuantity()" class="inline-flex items-center justify-center w-12 h-12 sm:w-10 sm:h-10 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 hover:border-gray-400 transition-colors touch-manipulation">
                                                 <svg class="w-5 h-5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,17 +91,17 @@
                                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                                         </svg>
-                                        Add to Cart
+                                        Tambah ke Keranjang
                                     </button>
                                 </form>
                             @else
                                 <button disabled class="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-gray-400 cursor-not-allowed">
-                                    Out of Stock
+                                    Stok Habis
                                 </button>
                             @endif
                         @else
                             <a href="{{ route('login') }}" class="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-150 shadow-md hover:shadow-lg">
-                                Login to Purchase
+                                Masuk untuk Membeli
                             </a>
                         @endauth
                     </div>

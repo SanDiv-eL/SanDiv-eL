@@ -68,7 +68,7 @@ class ProductController extends Controller
 
         \App\Models\Product::create($data);
 
-        return redirect()->route('admin.products.index')->with('success', 'Product created successfully.');
+        return redirect()->route('admin.products.index')->with('success', 'Produk berhasil dibuat.');
     }
 
     public function show(string $id)
@@ -115,13 +115,13 @@ class ProductController extends Controller
 
         $product->update($data);
 
-        return redirect()->route('admin.products.index')->with('success', 'Product updated successfully.');
+        return redirect()->route('admin.products.index')->with('success', 'Produk berhasil diperbarui.');
     }
 
     public function destroy(string $id)
     {
         $product = \App\Models\Product::findOrFail($id);
         $product->delete();
-        return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully.');
+        return redirect()->route('admin.products.index')->with('success', 'Produk berhasil dihapus.');
     }
 }

@@ -6,14 +6,14 @@
                 <div class="p-4 sm:p-6 bg-white border-b border-gray-100">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
                         <div>
-                            <h3 class="text-lg sm:text-xl font-semibold text-gray-900">Category List</h3>
-                            <p class="text-sm text-gray-600 mt-1">{{ $categories->total() }} categories total</p>
+                            <h3 class="text-lg sm:text-xl font-semibold text-gray-900">Daftar Kategori</h3>
+                            <p class="text-sm text-gray-600 mt-1">{{ $categories->total() }} kategori total</p>
                         </div>
                         <a href="{{ route('admin.categories.create') }}" class="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2.5 bg-indigo-600 border border-transparent rounded-lg font-semibold text-xs sm:text-sm text-white uppercase tracking-widest hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 shadow-sm">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                             </svg>
-                            Add New Category
+                            Tambah Kategori Baru
                         </a>
                     </div>
                 </div>
@@ -37,11 +37,11 @@
                             <thead>
                                 <tr class="border-b border-gray-200">
                                     <th class="py-3 px-4 text-sm font-semibold text-gray-700">ID</th>
-                                    <th class="py-3 px-4 text-sm font-semibold text-gray-700">Name</th>
+                                    <th class="py-3 px-4 text-sm font-semibold text-gray-700">Nama</th>
                                     <th class="py-3 px-4 text-sm font-semibold text-gray-700">Slug</th>
-                                    <th class="py-3 px-4 text-sm font-semibold text-gray-700">Description</th>
-                                    <th class="py-3 px-4 text-sm font-semibold text-gray-700">Products</th>
-                                    <th class="py-3 px-4 text-sm font-semibold text-gray-700">Actions</th>
+                                    <th class="py-3 px-4 text-sm font-semibold text-gray-700">Deskripsi</th>
+                                    <th class="py-3 px-4 text-sm font-semibold text-gray-700">Produk</th>
+                                    <th class="py-3 px-4 text-sm font-semibold text-gray-700">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
@@ -53,7 +53,7 @@
                                         <td class="py-4 px-4 text-sm text-gray-600">{{ Str::limit($category->description, 50) }}</td>
                                         <td class="py-4 px-4 text-sm text-gray-600">
                                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
-                                                {{ $category->products_count }} products
+                                                {{ $category->products_count }} produk
                                             </span>
                                         </td>
                                         <td class="py-4 px-4">
@@ -68,7 +68,7 @@
                                                     <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                                     </svg>
-                                                    Delete
+                                                    Hapus
                                                 </button>
                                             </div>
                                         </td>
@@ -96,21 +96,21 @@
                     </svg>
                 </div>
                 <div class="mt-4 text-center">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">Delete Category</h3>
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">Hapus Kategori</h3>
                     <div class="mt-2 px-7 py-3">
                         <p class="text-sm text-gray-500" id="deleteMessage">
-                            Are you sure you want to delete <span id="categoryName" class="font-semibold text-gray-900"></span>?
+                            Apakah Anda yakin ingin menghapus <span id="categoryName" class="font-semibold text-gray-900"></span>?
                         </p>
                     </div>
                     <div class="flex gap-3 px-4 py-3">
                         <button onclick="closeDeleteModal()" class="flex-1 px-4 py-2 bg-gray-100 text-gray-700 text-base font-medium rounded-lg hover:bg-gray-200 transition-colors">
-                            Cancel
+                            Batal
                         </button>
                         <form id="deleteForm" method="POST" class="flex-1">
                             @csrf
                             @method('DELETE')
                             <button type="submit" id="deleteButton" class="w-full px-4 py-2 bg-red-600 text-white text-base font-medium rounded-lg hover:bg-red-700 transition-colors shadow-sm hover:shadow">
-                                Delete
+                                Hapus
                             </button>
                         </form>
                     </div>
@@ -129,11 +129,11 @@
             const deleteButton = document.getElementById('deleteButton');
             
             if (productsCount > 0) {
-                deleteMessage.innerHTML = `Cannot delete <span class="font-semibold text-gray-900">${categoryName}</span> because it has ${productsCount} product(s). Please reassign or delete the products first.`;
+                deleteMessage.innerHTML = `Tidak dapat menghapus <span class="font-semibold text-gray-900">${categoryName}</span> karena memiliki ${productsCount} produk. Silakan pindahkan atau hapus produk terlebih dahulu.`;
                 deleteButton.disabled = true;
                 deleteButton.classList.add('opacity-50', 'cursor-not-allowed');
             } else {
-                deleteMessage.innerHTML = `Are you sure you want to delete <span class="font-semibold text-gray-900">${categoryName}</span>? This action cannot be undone.`;
+                deleteMessage.innerHTML = `Apakah Anda yakin ingin menghapus <span class="font-semibold text-gray-900">${categoryName}</span>? Tindakan ini tidak dapat dibatalkan.`;
                 deleteButton.disabled = false;
                 deleteButton.classList.remove('opacity-50', 'cursor-not-allowed');
             }
