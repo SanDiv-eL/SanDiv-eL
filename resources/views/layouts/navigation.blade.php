@@ -254,7 +254,7 @@
                     </form>
                 </div>
             @else
-                <div class="mt-3 space-y-1 px-4">
+                <div class="space-y-1">
                     <x-responsive-nav-link :href="route('login')">
                         {{ __('Log in') }}
                     </x-responsive-nav-link>

@@ -62,29 +62,30 @@
     </div>
 
     <!-- Featured Products Section -->
-    <div class="bg-gray-50 py-16">
+    <div id="featured" class="py-16 bg-gray-50 scroll-mt-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Best Sellers</h2>
-                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+            <div class="text-center mb-12">
+                <p class="text-xs sm:text-sm font-semibold text-indigo-600 uppercase tracking-wide">Best Sellers</p>
+                <h2 class="mt-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900">
                     Featured Products
-                </p>
-                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+                </h2>
+                <p class="mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base lg:text-lg text-gray-500 mx-auto">
                     Hand-picked selection of our top-rated computers.
                 </p>
             </div>
 
-            <div id="featured" class="mt-12 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <!-- Products Grid -->
+            <div class="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 @foreach($featuredProducts as $product)
-                    <div class="group bg-white rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col transform hover:-translate-y-2">
+                    <div class="group bg-white rounded-xl sm:rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col transform hover:-translate-y-2">
                         <div class="relative pb-48 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
                             <!-- Stock Badge -->
                             @if($product->stock > 0)
-                                <span class="absolute top-3 left-3 z-10 inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-500 text-white shadow-lg">
+                                <span class="absolute top-2 left-2 sm:top-3 sm:left-3 z-10 inline-flex items-center px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs font-semibold bg-green-500 text-white shadow-lg">
                                     In Stock
                                 </span>
                             @else
-                                <span class="absolute top-3 left-3 z-10 inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-red-500 text-white shadow-lg">
+                                <span class="absolute top-2 left-2 sm:top-3 sm:left-3 z-10 inline-flex items-center px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-xs font-semibold bg-red-500 text-white shadow-lg">
                                     Out of Stock
                                 </span>
                             @endif
@@ -95,33 +96,36 @@
                                  onerror="this.onerror=null; this.src='https://placehold.co/400x300?text=No+Image';">
                             
                             <!-- Quick View Overlay -->
-                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
-                                <a href="{{ route('products.show', $product->slug) }}" class="opacity-0 group-hover:opacity-100 transform scale-90 group-hover:scale-100 transition-all duration-300 inline-flex items-center px-4 py-2 bg-white rounded-lg shadow-lg text-sm font-medium text-gray-900 hover:bg-gray-50">
-                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                    </svg>
-                                    Quick View
-                                </a>
-                            </div>
+                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
                         </div>
-                        <div class="p-6 flex-1 flex flex-col">
-                            <div class="flex-1">
-                                <p class="text-xs font-semibold text-indigo-600 uppercase tracking-wide mb-2">
+                        
+                        <div class="p-3 sm:p-5 flex-1 flex flex-col">
+                            <div class="mb-1 sm:mb-2">
+                                <p class="text-xs font-semibold text-indigo-600 uppercase tracking-wide">
                                     {{ $product->category->name ?? 'Computer' }}
                                 </p>
-                                <a href="{{ route('products.show', $product->slug) }}" class="block group-hover:text-indigo-600 transition-colors">
-                                    <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-2">{{ $product->name }}</h3>
-                                    <p class="text-sm text-gray-500 line-clamp-2 mb-4">{{ $product->description }}</p>
-                                </a>
                             </div>
-                            <div class="mt-4 flex items-center justify-between">
-                                <div class="flex-1 min-w-0 mr-3">
-                                    <p class="text-lg font-bold text-gray-900 truncate">{{ formatRupiah($product->price) }}</p>
-                                    <p class="text-xs text-gray-500 mt-0.5">Free shipping</p>
+                            <a href="{{ route('products.show', $product->slug) }}" class="block group-hover:text-indigo-600 transition-colors">
+                                <h3 class="text-sm sm:text-lg font-bold text-gray-900 mb-1 sm:mb-2 line-clamp-2">{{ $product->name }}</h3>
+                                
+                                <div class="flex items-center mb-2">
+                                    <x-star-rating :rating="$product->rating" />
+                                    <span class="mx-1.5 text-gray-300">|</span>
+                                    <span class="text-xs text-gray-500">{{ $product->sold_count }} sold</span>
                                 </div>
-                                <a href="{{ route('products.show', $product->slug) }}" class="inline-flex items-center justify-center px-4 py-2.5 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-150 shadow-sm hover:shadow-md flex-shrink-0">
-                                    View
+
+                                <p class="text-xs sm:text-sm text-gray-500 line-clamp-2 mb-2 sm:mb-4 hidden sm:block">{{ $product->description }}</p>
+                            </a>
+                            <div class="mt-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm sm:text-lg font-bold text-gray-900 truncate">{{ formatRupiah($product->price) }}</p>
+                                    <p class="text-xs text-gray-500 hidden sm:block">Free shipping</p>
+                                </div>
+                                <a href="{{ route('products.show', $product->slug) }}" class="inline-flex items-center justify-center px-4 py-2.5 border border-transparent text-sm font-medium rounded-lg text-indigo-700 bg-indigo-50 hover:bg-indigo-100 transition-colors duration-150 w-full sm:w-auto flex-shrink-0 group-hover:bg-indigo-600 group-hover:text-white">
+                                    View Details
+                                    <svg class="w-4 h-4 ml-2 -mr-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                    </svg>
                                 </a>
                             </div>
                         </div>
@@ -129,7 +133,7 @@
                 @endforeach
             </div>
             
-            <div class="mt-12 text-center">
+            <div class="mt-12 mb-12 text-center">
                 <a href="{{ route('products.index') }}" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50 border-indigo-200 shadow-sm transition duration-150 ease-in-out">
                     View All Products
                 </a>
