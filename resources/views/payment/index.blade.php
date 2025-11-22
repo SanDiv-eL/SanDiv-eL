@@ -8,8 +8,8 @@
                     <div class="lg:col-span-2">
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                             <div class="p-4 sm:p-6 border-b border-gray-100">
-                                <h3 class="text-base sm:text-lg font-semibold text-gray-900">Select Payment Method</h3>
-                                <p class="text-xs sm:text-sm text-gray-500 mt-1">Choose your preferred payment method</p>
+                                <h3 class="text-base sm:text-lg font-semibold text-gray-900">Pilih Metode Pembayaran</h3>
+                                <p class="text-xs sm:text-sm text-gray-500 mt-1">Pilih metode pembayaran yang Anda inginkan</p>
                             </div>
                             
                             <div class="p-4 sm:p-6 space-y-3 sm:space-y-4">
@@ -24,7 +24,7 @@
                                         </div>
                                         <div class="ml-4">
                                             <p class="text-sm font-semibold text-gray-900">QRIS</p>
-                                            <p class="text-xs text-gray-500">Scan QR code with any e-wallet</p>
+                                            <p class="text-xs text-gray-500">Pindai kode QR dengan e-wallet apa pun</p>
                                         </div>
                                     </div>
                                     <div class="peer-checked:opacity-100 opacity-0 transition-opacity">
@@ -45,7 +45,7 @@
                                             </svg>
                                         </div>
                                         <div class="ml-4">
-                                            <p class="text-sm font-semibold text-gray-900">Bank Transfer</p>
+                                            <p class="text-sm font-semibold text-gray-900">Transfer Bank</p>
                                             <p class="text-xs text-gray-500">BCA, Mandiri, BNI, BRI</p>
                                         </div>
                                     </div>
@@ -86,7 +86,7 @@
                     <div class="lg:col-span-1">
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden sticky top-24">
                             <div class="p-6 border-b border-gray-100">
-                                <h3 class="text-lg font-semibold text-gray-900">Order Summary</h3>
+                                <h3 class="text-lg font-semibold text-gray-900">Ringkasan Pesanan</h3>
                             </div>
                             
                             <div class="p-6">
@@ -110,7 +110,7 @@
                                 </div>
 
                                 <button type="submit" id="payButton" class="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-150 shadow-md hover:shadow-lg">
-                                    <span id="buttonText">Process Payment</span>
+                                    <span id="buttonText">Proses Pembayaran</span>
                                     <svg id="buttonSpinner" class="hidden animate-spin ml-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -118,7 +118,7 @@
                                 </button>
 
                                 <p class="text-xs text-gray-500 text-center mt-4">
-                                    🔒 Secure payment processing
+                                    🔒 Proses pembayaran aman
                                 </p>
                             </div>
                         </div>
@@ -136,7 +136,7 @@
             
             button.disabled = true;
             button.classList.add('opacity-75', 'cursor-not-allowed');
-            buttonText.textContent = 'Processing...';
+            buttonText.textContent = 'Memproses...';
             buttonSpinner.classList.remove('hidden');
         });
     </script>

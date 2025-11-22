@@ -65,6 +65,6 @@ class OrderController extends Controller
 
         session()->forget('cart');
 
-        return redirect()->route('payment.show', $order)->with('success', 'Order created! Please complete payment.');
+        return redirect()->route('payment.show', $order)->with('success', 'Pesanan dibuat! Silakan selesaikan pembayaran.');
     }
 }

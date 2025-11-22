@@ -6,14 +6,14 @@
                 <div class="p-4 sm:p-6 bg-white border-b border-gray-100">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
                         <div>
-                            <h3 class="text-lg sm:text-xl font-semibold text-gray-900">Product List</h3>
-                            <p class="text-sm text-gray-600 mt-1">{{ $products->total() }} products total</p>
+                            <h3 class="text-lg sm:text-xl font-semibold text-gray-900">Daftar Produk</h3>
+                            <p class="text-sm text-gray-600 mt-1">{{ $products->total() }} produk total</p>
                         </div>
                         <a href="{{ route('admin.products.create') }}" class="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2.5 bg-indigo-600 border border-transparent rounded-lg font-semibold text-xs sm:text-sm text-white uppercase tracking-widest hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 shadow-sm">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                             </svg>
-                            Add New Product
+                            Tambah Produk Baru
                         </a>
                     </div>
                 </div>
@@ -32,14 +32,14 @@
                                    name="search" 
                                    value="{{ request('search') }}"
                                    class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition"
-                                   placeholder="Search products...">
+                                   placeholder="Cari produk...">
                         </div>
 
                         <!-- Category Filter -->
                         <div class="w-full md:w-48">
                             <select name="category" 
                                     class="block w-full py-2.5 px-3 border border-gray-300 bg-white rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition">
-                                <option value="">All Categories</option>
+                                <option value="">Semua Kategori</option>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>
                                         {{ $category->name }}
@@ -71,10 +71,10 @@
                     @if(request('search') || request('category'))
                         <div class="mt-4 pt-4 border-t border-gray-200">
                             <div class="flex flex-wrap items-center gap-2">
-                                <span class="text-sm font-medium text-gray-700">Active filters:</span>
+                                <span class="text-sm font-medium text-gray-700">Filter aktif:</span>
                                 @if(request('search'))
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-                                        Search: "{{ request('search') }}"
+                                        Cari: "{{ request('search') }}"
                                         <a href="{{ route('admin.products.index', array_filter(['category' => request('category')])) }}" class="ml-2 text-indigo-600 hover:text-indigo-800">
                                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
@@ -88,7 +88,7 @@
                                     @endphp
                                     @if($selectedCategory)
                                         <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-                                            Category: {{ $selectedCategory->name }}
+                                            Kategori: {{ $selectedCategory->name }}
                                             <a href="{{ route('admin.products.index', array_filter(['search' => request('search')])) }}" class="ml-2 text-indigo-600 hover:text-indigo-800">
                                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                                     <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
@@ -116,11 +116,11 @@
                                 <tr class="border-b border-gray-200">
                                     <th class="py-3 px-4 text-sm font-semibold text-gray-700">ID</th>
                                     <th class="py-3 px-4 text-sm font-semibold text-gray-700">Image</th>
-                                    <th class="py-3 px-4 text-sm font-semibold text-gray-700">Name</th>
-                                    <th class="py-3 px-4 text-sm font-semibold text-gray-700">Category</th>
-                                    <th class="py-3 px-4 text-sm font-semibold text-gray-700">Price</th>
-                                    <th class="py-3 px-4 text-sm font-semibold text-gray-700">Stock</th>
-                                    <th class="py-3 px-4 text-sm font-semibold text-gray-700">Actions</th>
+                                    <th class="py-3 px-4 text-sm font-semibold text-gray-700">Nama</th>
+                                    <th class="py-3 px-4 text-sm font-semibold text-gray-700">Kategori</th>
+                                    <th class="py-3 px-4 text-sm font-semibold text-gray-700">Harga</th>
+                                    <th class="py-3 px-4 text-sm font-semibold text-gray-700">Stok</th>
+                                    <th class="py-3 px-4 text-sm font-semibold text-gray-700">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
@@ -146,7 +146,7 @@
                                                     <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                                     </svg>
-                                                    Delete
+                                                    Hapus
                                                 </button>
                                             </div>
                                         </td>
@@ -176,22 +176,22 @@
                 </div>
                 <!-- Content -->
                 <div class="mt-4 text-center">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">Delete Product</h3>
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">Hapus Produk</h3>
                     <div class="mt-2 px-7 py-3">
                         <p class="text-sm text-gray-500">
-                            Are you sure you want to delete <span id="productName" class="font-semibold text-gray-900"></span>? This action cannot be undone.
+                            Apakah Anda yakin ingin menghapus <span id="productName" class="font-semibold text-gray-900"></span>? Tindakan ini tidak dapat dibatalkan.
                         </p>
                     </div>
                     <!-- Buttons -->
                     <div class="flex gap-3 px-4 py-3">
                         <button onclick="closeDeleteModal()" class="flex-1 px-4 py-2 bg-gray-100 text-gray-700 text-base font-medium rounded-lg hover:bg-gray-200 transition-colors">
-                            Cancel
+                            Batal
                         </button>
                         <form id="deleteForm" method="POST" class="flex-1">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="w-full px-4 py-2 bg-red-600 text-white text-base font-medium rounded-lg hover:bg-red-700 transition-colors shadow-sm hover:shadow">
-                                Delete
+                                Hapus
                             </button>
                         </form>
                     </div>

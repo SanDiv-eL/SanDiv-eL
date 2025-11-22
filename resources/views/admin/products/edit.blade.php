@@ -1,10 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-lg sm:text-xl text-gray-800 leading-tight">
-            {{ __('Edit Product') }}
-        </h2>
-    </x-slot>
-
     <div class="py-6 sm:py-12 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm rounded-xl border border-gray-100">
@@ -14,11 +8,11 @@
                         @method('PUT')
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                             <div>
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Product Name</label>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Nama Produk</label>
                                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" name="name" value="{{ $product->name }}" required>
                             </div>
                             <div>
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="category_id">Category</label>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="category_id">Kategori</label>
                                 <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="category_id" name="category_id" required>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
@@ -26,27 +20,27 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="price">Price (Rp)</label>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="price">Harga (Rp)</label>
                                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="price" type="number" step="1" name="price" value="{{ $product->price }}" required>
                             </div>
                             <div>
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="stock">Stock</label>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="stock">Stok</label>
                                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="stock" type="number" name="stock" value="{{ $product->stock }}">
                             </div>
                             <div class="md:col-span-2">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="image">Image URL</label>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="image">URL Gambar</label>
                                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="image" type="url" name="image" value="{{ $product->image }}" placeholder="https://example.com/image.jpg">
                             </div>
                             <div class="md:col-span-2">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="description">Description</label>
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="description">Deskripsi</label>
                                 <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" name="description" rows="4" required>{{ $product->description }}</textarea>
                             </div>
                             
                             <div class="md:col-span-2">
                                 <div class="flex justify-between items-center mb-4 border-b pb-2">
-                                    <h3 class="text-lg font-bold">Specifications</h3>
+                                    <h3 class="text-lg font-bold">Spesifikasi</h3>
                                     <button type="button" onclick="addSpecification()" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded text-sm">
-                                        + Add Specification
+                                        + Tambah Spesifikasi
                                     </button>
                                 </div>
                                 <div id="specifications-container" class="space-y-3">
@@ -57,7 +51,7 @@
 
                         <div class="flex items-center justify-end mt-6">
                             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                Update Product
+                                Perbarui Produk
                             </button>
                         </div>
                     </form>
@@ -79,7 +73,7 @@
                         type="text" 
                         name="spec_keys[]" 
                         value="${key}"
-                        placeholder="e.g., CPU, RAM, Display" 
+                        placeholder="Contoh: CPU, RAM, Layar" 
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         required>
                 </div>
@@ -88,7 +82,7 @@
                         type="text" 
                         name="spec_values[]" 
                         value="${value}"
-                        placeholder="e.g., Intel Core i7, 16GB DDR5" 
+                        placeholder="Contoh: Intel Core i7, 16GB DDR5" 
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         required>
                 </div>

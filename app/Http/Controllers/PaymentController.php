@@ -93,7 +93,7 @@ class PaymentController extends Controller
         // Clear cart after successful payment
         session()->forget('cart');
 
-        return redirect()->route('payment.success', $order)->with('success', 'Payment verified successfully!');
+        return redirect()->route('payment.success', $order)->with('success', 'Pembayaran berhasil diverifikasi!');
     }
 
     private function generatePaymentDetails($order)
@@ -102,30 +102,52 @@ class PaymentController extends Controller
 
         switch ($order->payment_method) {
             case 'qris':
+                // Get static QRIS from environment
+                $staticQRIS = env('QRIS_STATIC_DATA');
+                
+                // Fallback to hardcoded QRIS if not in environment
+                if (empty($staticQRIS)) {
+                    $staticQRIS = 'XXXXXXXXXXXXXXXX';
+                }
+                
+                // Generate dynamic QRIS with transaction amount and order ID
+                $dynamicQRIS = \App\Helpers\QRISHelper::generateDynamicQRIS(
+                    $staticQRIS,
+                    $order->total_price,
+                    'ORDER-' . $order->id
+                );
+                
+                // Get merchant info for display
+                $merchantInfo = \App\Helpers\QRISHelper::getMerchantInfo($staticQRIS);
+                
                 $details = [
                     'type' => 'QRIS',
-                    'qr_code' => 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' . urlencode('QRIS_DEMO_' . $order->id),
+                    'qris_data' => $dynamicQRIS, // Raw QRIS string for client-side generation
+                    'merchant_name' => $merchantInfo['merchant_name'],
+                    'merchant_city' => $merchantInfo['merchant_city'],
+                    'amount' => formatRupiah($order->total_price),
+                    'order_id' => 'ORDER-' . $order->id,
                     'instructions' => [
-                        'Open your mobile banking or e-wallet app',
-                        'Select "Scan QR" or "QRIS"',
-                        'Scan the QR code above',
-                        'Verify the payment amount',
-                        'Complete the payment',
+                        'Buka aplikasi mobile banking atau e-wallet Anda',
+                        'Pilih "Scan QR" atau "QRIS"',
+                        'Pindai kode QR di atas',
+                        'Nominal pembayaran sudah otomatis terisi: ' . formatRupiah($order->total_price),
+                        'Verifikasi dan selesaikan pembayaran',
                     ],
                 ];
                 break;
 
             case 'bank_transfer':
                 $details = [
-                    'type' => 'Bank Transfer',
+                    'type' => 'Transfer Bank',
                     'bank_name' => 'Bank Mandiri',
                     'account_number' => '1234567890' . str_pad($order->id, 6, '0', STR_PAD_LEFT),
-                    'account_name' => 'SanDiv El',
+                    'account_name' => 'SanDiv.ID',
                     'instructions' => [
-                        'Transfer to the virtual account number above',
-                        'Amount must match exactly: ' . formatRupiah($order->total_price),
-                        'Payment will be verified automatically',
-                        'Virtual account is valid for 24 hours',
+                        'Transfer ke nomor virtual account di atas',
+                        'Jumlah harus sama persis: ' . formatRupiah($order->total_price),
+                        'Pembayaran akan diverifikasi secara otomatis',
+                        'Virtual account berlaku selama 24 jam',
                     ],
                 ];
                 break;
@@ -136,11 +158,11 @@ class PaymentController extends Controller
                     'wallet_type' => 'GoPay / OVO / Dana',
                     'phone_number' => '0812-3456-' . str_pad($order->id, 4, '0', STR_PAD_LEFT),
                     'instructions' => [
-                        'Open your e-wallet app (GoPay/OVO/Dana)',
-                        'Select "Transfer" or "Send Money"',
-                        'Enter the phone number above',
-                        'Enter amount: ' . formatRupiah($order->total_price),
-                        'Complete the transfer',
+                        'Buka aplikasi e-wallet Anda (GoPay/OVO/Dana)',
+                        'Pilih "Transfer" atau "Kirim Uang"',
+                        'Masukkan nomor telepon di atas',
+                        'Masukkan jumlah: ' . formatRupiah($order->total_price),
+                        'Selesaikan transfer',
                     ],
                 ];
                 break;

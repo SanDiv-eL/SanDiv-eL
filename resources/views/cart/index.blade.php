@@ -6,7 +6,7 @@
                 <div class="lg:w-2/3">
                     <div class="bg-white overflow-hidden shadow-sm rounded-xl border border-gray-100">
                         <div class="p-4 sm:p-6 bg-white border-b border-gray-100">
-                            <h3 class="text-base sm:text-lg font-medium text-gray-900">Cart Items</h3>
+                            <h3 class="text-base sm:text-lg font-medium text-gray-900">Item Keranjang</h3>
                         </div>
                         <div class="p-4 sm:p-6">
                             @if(session('cart') && count(session('cart')) > 0)
@@ -14,16 +14,16 @@
                                     @foreach(session('cart') as $id => $details)
                                         <li class="py-4 sm:py-6 flex flex-col sm:flex-row">
                                             <div class="flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 border border-gray-200 rounded-md overflow-hidden mb-3 sm:mb-0">
-                                                <img src="{{ $details['image'] ?? 'https://via.placeholder.com/150' }}" alt="{{ $details['name'] }}" class="w-full h-full object-center object-cover">
+                                                <img src="{{ $details['image'] ?? 'https://via.placeholder.com/150' }}" alt="{{ $details['name'] ?? 'Product' }}" class="w-full h-full object-center object-cover">
                                             </div>
 
                                             <div class="sm:ml-4 flex-1 flex flex-col">
                                                 <div>
                                                     <div class="flex justify-between text-sm sm:text-base font-medium text-gray-900">
                                                         <h3 class="flex-1 pr-2">
-                                                            <a href="{{ route('products.show', \App\Models\Product::find($id)->slug ?? '#') }}">{{ $details['name'] }}</a>
+                                                            <a href="{{ route('products.show', \App\Models\Product::find($id)->slug ?? '#') }}">{{ $details['name'] ?? 'Unknown Product' }}</a>
                                                         </h3>
-                                                        <p class="ml-2 whitespace-nowrap">{{ formatRupiah($details['price']) }}</p>
+                                                        <p class="ml-2 whitespace-nowrap">{{ formatRupiah($details['price'] ?? 0) }}</p>
                                                     </div>
                                                     <p class="mt-1 text-xs sm:text-sm text-gray-500">{{ \App\Models\Product::find($id)->category->name ?? 'Product' }}</p>
                                                 </div>
@@ -35,7 +35,7 @@
                                                     </div>
 
                                                     <div class="flex">
-                                                        <button onclick="removeFromCart({{ $id }})" type="button" class="font-medium text-sm text-indigo-600 hover:text-indigo-500 transition-colors touch-manipulation py-2">Remove</button>
+                                                        <button onclick="removeFromCartWithConfirm({{ $id }})" type="button" class="font-medium text-sm text-indigo-600 hover:text-indigo-500 transition-colors touch-manipulation py-2">Hapus</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -45,11 +45,11 @@
                             @else
                                 <div class="text-center py-8 sm:py-12">
                                     <svg class="mx-auto h-10 w-10 sm:h-12 sm:w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                                    <h3 class="mt-2 text-sm font-medium text-gray-900">Your cart is empty</h3>
-                                    <p class="mt-1 text-xs sm:text-sm text-gray-500">Start adding some items to your cart.</p>
+                                    <h3 class="mt-2 text-sm font-medium text-gray-900">Keranjang Anda kosong</h3>
+                                    <p class="mt-1 text-xs sm:text-sm text-gray-500">Mulai tambahkan beberapa item ke keranjang Anda.</p>
                                     <div class="mt-4 sm:mt-6">
                                         <a href="{{ route('products.index') }}" class="inline-flex items-center px-4 py-2 sm:px-4 sm:py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 touch-manipulation">
-                                            Browse Products
+                                            Lihat Produk
                                         </a>
                                     </div>
                                 </div>
@@ -62,12 +62,14 @@
                 <div class="lg:w-1/3">
                     <div class="bg-white overflow-hidden shadow-sm rounded-xl border border-gray-100 sticky top-24">
                         <div class="p-6 bg-gray-50 border-b border-gray-100">
-                            <h3 class="text-lg font-medium text-gray-900">Order Summary</h3>
+                            <h3 class="text-lg font-medium text-gray-900">Ringkasan Pesanan</h3>
                         </div>
                         <div class="p-6">
                             @php
                                 $cart = session('cart') ?? [];
-                                $subtotal = array_sum(array_map(function($item) { return $item['price'] * $item['quantity']; }, $cart));
+                                $subtotal = array_sum(array_map(function($item) { 
+                                    return ($item['price'] ?? 0) * ($item['quantity'] ?? 0); 
+                                }, $cart));
                             @endphp
                             <dl class="space-y-4">
                                 <div class="flex items-center justify-between">
@@ -75,19 +77,19 @@
                                     <dd class="text-sm font-medium text-gray-900">{{ formatRupiah($subtotal) }}</dd>
                                 </div>
                                 <div class="flex items-center justify-between border-t border-gray-200 pt-4">
-                                    <dt class="text-base font-medium text-gray-900">Order Total</dt>
+                                    <dt class="text-base font-medium text-gray-900">Total Pesanan</dt>
                                     <dd class="text-base font-bold text-indigo-600">{{ formatRupiah($subtotal) }}</dd>
                                 </div>
                             </dl>
 
                             <div class="mt-6">
                                 <a href="{{ route('checkout.index') }}" class="w-full flex items-center justify-center px-4 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors {{ count($cart) == 0 ? 'opacity-50 cursor-not-allowed pointer-events-none' : '' }}">
-                                    Proceed to Checkout
+                                    Lanjut ke Pembayaran
                                 </a>
                             </div>
                             <div class="mt-4 text-center">
                                 <a href="{{ route('products.index') }}" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                                    or Continue Shopping
+                                    atau Lanjutkan Belanja
                                 </a>
                             </div>
                         </div>
@@ -97,12 +99,58 @@
         </div>
     </div>
 
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-lg bg-white">
+            <div class="mt-3">
+                <div class="flex items-center justify-center w-12 h-12 mx-auto bg-red-100 rounded-full">
+                    <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 text-center mt-4" id="modalTitle">Konfirmasi Hapus</h3>
+                <p class="text-sm text-gray-500 text-center mt-2" id="modalMessage">Apakah Anda yakin ingin menghapus produk ini dari keranjang?</p>
+                <div class="flex gap-3 mt-6">
+                    <button onclick="closeModal()" class="flex-1 px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">
+                        Batal
+                    </button>
+                    <button onclick="confirmAction()" class="flex-1 px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 transition-colors">
+                        Hapus
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        let pendingAction = null;
+
+        function showModal(title, message, callback) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalMessage').textContent = message;
+            pendingAction = callback;
+            document.getElementById('confirmModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('confirmModal').classList.add('hidden');
+            pendingAction = null;
+        }
+
+        function confirmAction() {
+            if (pendingAction) {
+                pendingAction();
+            }
+            closeModal();
+        }
+
         function updateQuantity(id, quantity) {
             if (quantity < 1) {
-                if(confirm("Are you sure you want to remove this product?")) {
-                    removeFromCart(id);
-                }
+                showModal(
+                    'Konfirmasi Hapus',
+                    'Apakah Anda yakin ingin menghapus produk ini dari keranjang?',
+                    () => removeFromCart(id)
+                );
                 return;
             }
             $.ajax({
@@ -120,19 +168,39 @@
         }
 
         function removeFromCart(id) {
-            if(confirm("Are you sure you want to remove this product?")) {
-                $.ajax({
-                    url: '{{ route('cart.remove') }}',
-                    method: "DELETE",
-                    data: {
-                        _token: '{{ csrf_token() }}', 
-                        id: id
-                    },
-                    success: function (response) {
-                        window.location.reload();
-                    }
-                });
-            }
+            $.ajax({
+                url: '{{ route('cart.remove') }}',
+                method: "DELETE",
+                data: {
+                    _token: '{{ csrf_token() }}', 
+                    id: id
+                },
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
         }
+
+        function removeFromCartWithConfirm(id) {
+            showModal(
+                'Konfirmasi Hapus',
+                'Apakah Anda yakin ingin menghapus produk ini dari keranjang?',
+                () => removeFromCart(id)
+            );
+        }
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('confirmModal')?.addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeModal();
+            }
+        });
     </script>
 </x-app-layout>

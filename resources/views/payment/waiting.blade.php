@@ -6,11 +6,11 @@
                 <div class="p-4 sm:p-6 bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
                         <div>
-                            <h3 class="text-base sm:text-lg font-semibold">Waiting for Payment</h3>
+                            <h3 class="text-base sm:text-lg font-semibold">Menunggu Pembayaran</h3>
                             <p class="text-xs sm:text-sm text-indigo-100 mt-1">Order #{{ str_pad($order->id, 6, '0', STR_PAD_LEFT) }}</p>
                         </div>
                         <div class="text-left sm:text-right">
-                            <p class="text-xs sm:text-sm text-indigo-100">Total Amount</p>
+                            <p class="text-xs sm:text-sm text-indigo-100">Total Pembayaran</p>
                             <p class="text-xl sm:text-2xl font-bold">{{ formatRupiah($order->total_price) }}</p>
                         </div>
                     </div>
@@ -20,32 +20,106 @@
                     <!-- Payment Method Badge -->
                     <div class="mb-6 flex items-center">
                         <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-                            Payment Method: {{ $paymentDetails['type'] }}
+                            Metode Pembayaran: {{ $paymentDetails['type'] }}
                         </span>
                     </div>
 
                     <!-- Payment Instructions based on method -->
                     @if($order->payment_method === 'qris')
                         <!-- QRIS Payment -->
-                        <div class="text-center mb-8">
-                            <h4 class="text-lg font-semibold text-gray-900 mb-4">Scan QR Code to Pay</h4>
-                            <div class="inline-block p-4 bg-white border-4 border-gray-200 rounded-2xl shadow-lg">
-                                <img src="{{ $paymentDetails['qr_code'] }}" alt="QRIS Code" class="w-64 h-64">
+                        <div class="space-y-6">
+                            <div class="text-center">
+                                <h4 class="text-xl font-bold text-gray-700 border-b pb-2 mb-4">Hasil Pindaian QRIS Dinamis</h4>
+                                
+                                <!-- Dynamic QRIS Badge -->
+                                <div class="mb-4 inline-flex items-center px-4 py-2 rounded-full bg-green-100 border border-green-200">
+                                    <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-sm font-medium text-green-800">QRIS Dynamic - Nominal Otomatis Terisi</span>
+                                </div>
                             </div>
-                            <p class="text-sm text-gray-500 mt-4">Scan with any e-wallet app (GoPay, OVO, Dana, ShopeePay, etc.)</p>
+
+                            <!-- Grid Layout: QR Code + Details -->
+                            <div class="grid md:grid-cols-2 gap-6 items-center">
+                                <!-- QR Code Canvas -->
+                                <div class="flex justify-center">
+                                    <div class="inline-block p-4 bg-white border-4 border-gray-200 rounded-2xl shadow-lg">
+                                        <canvas id="qris-canvas" class="max-w-full"></canvas>
+                                    </div>
+                                </div>
+
+                                <!-- Payment Details -->
+                                <div class="space-y-3 bg-gray-50 p-6 rounded-xl">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-500">Nama Merchant</p>
+                                        <p class="text-lg font-semibold text-gray-800 break-words">{{ $paymentDetails['merchant_name'] ?? 'QRIS Merchant' }}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-500">Nominal Transaksi</p>
+                                        <p class="text-2xl font-bold text-indigo-600">{{ formatRupiah($order->total_price) }}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-500">Kota Merchant</p>
+                                        <p class="text-lg font-semibold text-gray-800">{{ $paymentDetails['merchant_city'] ?? '-' }}</p>
+                                    </div>
+                                    <div class="pt-2 border-t border-gray-200">
+                                        <p class="text-sm font-medium text-gray-500">Order ID</p>
+                                        <p class="text-base font-mono font-semibold text-gray-800">{{ $paymentDetails['order_id'] ?? 'ORDER-' . $order->id }}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Info Text -->
+                            <div class="text-center">
+                                <p class="text-sm text-gray-600">
+                                    <strong class="text-green-600">✓</strong> Nominal sudah otomatis terisi saat scan<br>
+                                    <span class="text-xs text-gray-500">Pindai dengan aplikasi e-wallet: GoPay, OVO, Dana, ShopeePay, LinkAja, dll.</span>
+                                </p>
+                            </div>
                         </div>
+
+                        <!-- QR Code Generation Script -->
+                        <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+                        <script>
+                            // Generate QR Code on page load
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const qrisData = "{{ $paymentDetails['qris_data'] ?? '' }}";
+                                const canvas = document.getElementById('qris-canvas');
+                                
+                                if (qrisData && canvas) {
+                                    const qrOptions = {
+                                        width: 280,
+                                        height: 280,
+                                        margin: 2,
+                                        errorCorrectionLevel: 'H',
+                                        color: {
+                                            dark: '#000000',
+                                            light: '#FFFFFF'
+                                        }
+                                    };
+                                    
+                                    QRCode.toCanvas(canvas, qrisData, qrOptions, function (error) {
+                                        if (error) {
+                                            console.error('QR Code generation error:', error);
+                                            canvas.parentElement.innerHTML = '<p class="text-red-500 text-sm">Error generating QR code</p>';
+                                        }
+                                    });
+                                }
+                            });
+                        </script>
 
                     @elseif($order->payment_method === 'bank_transfer')
                         <!-- Bank Transfer Payment -->
                         <div class="mb-8">
-                            <h4 class="text-lg font-semibold text-gray-900 mb-4">Transfer to Virtual Account</h4>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-4">Transfer ke Virtual Account</h4>
                             <div class="bg-gray-50 rounded-xl p-6 space-y-4">
                                 <div class="flex justify-between items-center pb-3 border-b border-gray-200">
                                     <span class="text-sm text-gray-600">Bank</span>
                                     <span class="text-base font-semibold text-gray-900">{{ $paymentDetails['bank_name'] }}</span>
                                 </div>
                                 <div class="flex justify-between items-center pb-3 border-b border-gray-200">
-                                    <span class="text-sm text-gray-600">Virtual Account Number</span>
+                                    <span class="text-sm text-gray-600">Nomor Virtual Account</span>
                                     <div class="text-right">
                                         <span class="text-lg font-mono font-bold text-gray-900">{{ $paymentDetails['account_number'] }}</span>
                                         <button onclick="copyToClipboard('{{ $paymentDetails['account_number'] }}')" class="ml-2 text-indigo-600 hover:text-indigo-700">
@@ -56,7 +130,7 @@
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center">
-                                    <span class="text-sm text-gray-600">Account Name</span>
+                                    <span class="text-sm text-gray-600">Nama Akun</span>
                                     <span class="text-base font-semibold text-gray-900">{{ $paymentDetails['account_name'] }}</span>
                                 </div>
                             </div>
@@ -65,14 +139,14 @@
                     @elseif($order->payment_method === 'e_wallet')
                         <!-- E-Wallet Payment -->
                         <div class="mb-8">
-                            <h4 class="text-lg font-semibold text-gray-900 mb-4">Transfer to E-Wallet</h4>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-4">Transfer ke E-Wallet</h4>
                             <div class="bg-gray-50 rounded-xl p-6 space-y-4">
                                 <div class="flex justify-between items-center pb-3 border-b border-gray-200">
                                     <span class="text-sm text-gray-600">E-Wallet</span>
                                     <span class="text-base font-semibold text-gray-900">{{ $paymentDetails['wallet_type'] }}</span>
                                 </div>
                                 <div class="flex justify-between items-center">
-                                    <span class="text-sm text-gray-600">Phone Number</span>
+                                    <span class="text-sm text-gray-600">Nomor Telepon</span>
                                     <div class="text-right">
                                         <span class="text-lg font-mono font-bold text-gray-900">{{ $paymentDetails['phone_number'] }}</span>
                                         <button onclick="copyToClipboard('{{ $paymentDetails['phone_number'] }}')" class="ml-2 text-indigo-600 hover:text-indigo-700">
@@ -88,7 +162,7 @@
 
                     <!-- Instructions -->
                     <div class="mb-8">
-                        <h4 class="text-base font-semibold text-gray-900 mb-3">Payment Instructions</h4>
+                        <h4 class="text-base font-semibold text-gray-900 mb-3">Instruksi Pembayaran</h4>
                         <ol class="space-y-2">
                             @foreach($paymentDetails['instructions'] as $index => $instruction)
                                 <li class="flex items-start">
@@ -106,12 +180,12 @@
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            I Have Completed Payment - Check Status
+                            Saya Sudah Menyelesaikan Pembayaran - Cek Status
                         </button>
                     </form>
 
                     <p class="text-xs text-gray-500 text-center mt-4">
-                        Click the button above after you've completed the payment
+                        Klik tombol di atas setelah Anda menyelesaikan pembayaran
                     </p>
                 </div>
 
@@ -125,7 +199,7 @@
                         </div>
                         <div class="ml-3">
                             <p class="text-sm text-yellow-700">
-                                <strong>Important:</strong> Please complete the payment within 24 hours. The payment details will expire after that.
+                                <strong>Penting:</strong> Harap selesaikan pembayaran dalam waktu 24 jam. Detail pembayaran akan kedaluwarsa setelah itu.
                             </p>
                         </div>
                     </div>
@@ -143,7 +217,7 @@
                 </svg>
             </div>
             <div class="flex-1">
-                <p class="text-sm font-medium text-gray-900" id="toast-message">Copied to clipboard!</p>
+                <p class="text-sm font-medium text-gray-900" id="toast-message">Disalin ke clipboard!</p>
             </div>
             <button onclick="hideToast()" class="flex-shrink-0 text-gray-400 hover:text-gray-500">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -177,10 +251,10 @@
 
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(function() {
-                showToast('Copied to clipboard!');
+                showToast('Disalin ke clipboard!');
             }, function(err) {
                 console.error('Could not copy text: ', err);
-                showToast('Failed to copy');
+                showToast('Gagal menyalin');
             });
         }
     </script>

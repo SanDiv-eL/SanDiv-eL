@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="mb-6 text-center">
-        <h2 class="text-2xl font-bold text-gray-900">Welcome Back</h2>
-        <p class="text-sm text-gray-600 mt-2">Please sign in to your account</p>
+        <h2 class="text-2xl font-bold text-gray-900">Selamat Datang Kembali</h2>
+        <p class="text-sm text-gray-600 mt-2">Silakan masuk ke akun Anda</p>
     </div>
 
     <!-- Session Status -->
@@ -34,27 +34,27 @@
         <div class="flex items-center justify-between mt-4">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                <span class="ms-2 text-sm text-gray-600">Ingat saya</span>
             </label>
 
             @if (Route::has('password.request'))
                 <a class="text-sm font-medium text-indigo-600 hover:text-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot password?') }}
+                    Lupa kata sandi?
                 </a>
             @endif
         </div>
 
         <div class="mt-6">
             <x-primary-button class="w-full justify-center">
-                {{ __('Log in') }}
+                Masuk
             </x-primary-button>
         </div>
         
         <div class="mt-6 text-center">
             <p class="text-sm text-gray-600">
-                Don't have an account? 
+                Belum punya akun? 
                 <a href="{{ route('register') }}" class="font-medium text-indigo-600 hover:text-indigo-500">
-                    Sign up
+                    Daftar
                 </a>
             </p>
         </div>
